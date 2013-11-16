@@ -76,7 +76,7 @@ module Puppet
 		end
 	end
 			
-	newtype :_ssh_authorized_key do
+	newtype :underscore_ssh_authorized_key do
 		@doc = <<-EOD
 			Manage authorized_keys files for users.
 			

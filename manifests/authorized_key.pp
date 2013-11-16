@@ -1,5 +1,5 @@
-# Wrapper for the native _ssh_authorized_key type into something nice and
-# namespaced.
+# Wrapper for the native underscore_ssh_authorized_key type into something
+# nice and namespaced.
 #
 define ssh::authorized_key($ensure = present,
                            $user,

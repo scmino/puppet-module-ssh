@@ -6,7 +6,7 @@ define ssh::authorized_key($ensure = present,
                            $options = [],
                            $type,
                            $key) {
-	authorized_key { $name:
+	::authorized_key { $name:
 		ensure  => $ensure,
 		user    => $user,
 		options => $options,

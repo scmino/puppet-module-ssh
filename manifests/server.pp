@@ -17,10 +17,10 @@ define ssh::server($protocol_version  = 2,
 			$ssh_hasstatus = true
 			$ssh_restart   = "/sbin/service sshd reload"
 		}
-		Debian: {
+		Debian,Ubuntu: {
 			$ssh_service   = "ssh"
-			$ssh_hasstatus = false
-			$ssh_restart   = "/etc/init.d/ssh reload"
+			$ssh_hasstatus = true
+			$ssh_restart   = "/usr/sbin/service ssh reload"
 		}
 		default: {
 			fail("Unknown \$::operatingsystem; please improve ssh::server")

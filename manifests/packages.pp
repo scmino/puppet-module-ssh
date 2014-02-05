@@ -8,7 +8,7 @@ class ssh::packages {
 		RedHat,CentOS: {
 			$ssh_package = "openssh"
 		}
-		Debian: {
+		Debian,Ubuntu: {
 			$ssh_package = "openssh-server"
 		}
 		default: {

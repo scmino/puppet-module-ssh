@@ -1,9 +1,13 @@
 # Setup an SSH server, and set a few basic, common configuration parameters.
 #
-define ssh::server($protocol_version  = 2,
-                   $password_auth     = true,
-                   $forward_x11       = false,
-                   $permit_root_login = "without-password") {
+define ssh::server($protocol_version        = 2,
+                   $permit_empty_passwords  = false,
+                   $challenge_response_auth = false,
+                   $syslog_facility         = AUTHPRIV,
+                   $log_level               = INFO,
+                   $password_auth           = true,
+                   $forward_x11             = false,
+                   $permit_root_login       = "without-password") {
 	include ssh::packages
 
 	ssh::noop {
@@ -29,10 +33,18 @@ define ssh::server($protocol_version  = 2,
 
 	ssh::sshd_config {
 		"Protocol":                        value => $protocol_version;
-		"PermitEmptyPasswords":            value => no;
-		"ChallengeResponseAuthentication": value => no;
-		"SyslogFacility":                  value => AUTHPRIV;
-		"LogLevel":                        value => INFO;
+		"PermitEmptyPasswords":
+			value => $permit_empty_passwords ? {
+				true  => yes,
+				false => no,
+			};
+		"ChallengeResponseAuthentication":
+			value => $challenge_response_auth ? {
+				true  => yes,
+				false => no,
+			};
+		"SyslogFacility":                  value => $syslog_facility;
+		"LogLevel":                        value => $log_level;
 		"PasswordAuthentication":
 			value => $password_auth ? {
 				true  => yes,
